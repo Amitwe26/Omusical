@@ -1,6 +1,6 @@
-import {SubmitHandler, useForm} from 'react-hook-form';
-import { login, signup } from '../services/authService';
-import { useState } from 'react';
+import {useForm} from 'react-hook-form';
+import {login, signup} from '../services/authService';
+import {useState} from 'react';
 import styled from 'styled-components';
 import {useNavigate} from "react-router-dom";
 // import {createUserWithEmailAndPassword, signInWithEmailAndPassword} from "firebase/auth";
@@ -14,8 +14,8 @@ type FormData = {
     password: string;
 };
 
-const AuthForm = ({ type }: AuthFormProps) => {
-    const { register, handleSubmit } = useForm<FormData>();
+const AuthForm = ({type}: AuthFormProps) => {
+    const {register, handleSubmit} = useForm<FormData>();
     const [error, setError] = useState<string | null>(null);
     const navigate = useNavigate();
 
@@ -25,7 +25,7 @@ const AuthForm = ({ type }: AuthFormProps) => {
             if (type === 'login') {
                 await login(data.email, data.password);
                 console.log('Logged in successfully!');
-                navigate('/live'); // אחרי הצלחה מעביר לעמוד הלייב
+                navigate('/rooms'); // אחרי הצלחה מעביר לעמוד הלייב
             } else {
                 await signup(data.email, data.password);
                 console.log('Signed up successfully!');
@@ -50,7 +50,7 @@ const AuthForm = ({ type }: AuthFormProps) => {
 
     return (
         <FormWrapper onSubmit={handleSubmit(onSubmit)}>
-            <h2>{type === 'login' ? 'Login' : 'Signup'}</h2>
+            <Title>{type === 'login' ? 'Login' : 'Signup'}</Title>
             <Input {...register('email')} placeholder="Email" type="email" required/>
             <Input {...register('password')} placeholder="Password" type="password" required/>
             {error && <ErrorText>{error}</ErrorText>}
@@ -74,10 +74,17 @@ const FormWrapper = styled.form`
     flex-direction: column;
 `;
 
+const Title = styled.h2`
+    align-self: center;
+`
+
 const Input = styled.input`
     margin-bottom: 1rem;
     padding: 0.5rem;
     font-size: 1rem;
+    border-radius: 20px;
+    border-width: 0.5px;
+    text-align: center;
 `;
 
 const SubmitButton = styled.button`
@@ -99,9 +106,10 @@ const ErrorText = styled.p`
 `;
 
 const BackButton = styled.button`
-  margin-top: 12px;
-  background-color: transparent;
-  color: blue;
-  text-decoration: underline;
-  cursor: pointer;
+    margin-top: 12px;
+    background-color: transparent;
+    color: #883bc6;
+    //text-decoration: underline;
+    cursor: pointer;
+    border: none;
 `;

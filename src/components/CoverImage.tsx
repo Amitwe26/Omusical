@@ -1,17 +1,16 @@
 import React from 'react';
 import styled from 'styled-components';
-
+import coverImage from '../assets/cover-picture.png'; // make sure the path is correct
 
 const CoverImage = () => {
-    return <ImageWrapper />;
+    return <StyledImage src={coverImage} alt="Cover" />;
 };
 
 export default CoverImage;
 
-const ImageWrapper = styled.div`
-  width: 100%;
-  height: 50vh;
-  background-image: url('https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4');
-  background-size: cover;
-  background-position: center;
+const StyledImage = styled.img`
+    width: 100%;
+    height: 60vh;
+    object-fit: contain;
+    object-position: center;
 `;

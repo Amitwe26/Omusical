@@ -9,7 +9,7 @@ const Home = () => {
             <Header />
             <CoverImage />
             <Description>
-                Music Chat הוא פלטפורמה חדשה שמחברת בין אנשים ואומנים בצ'אט מוזיקה חי. הצטרפו לשיחות, חלקו קטעים והתחברו לקהילה מוזיקלית מכל העולם 🎵💬
+                Omusical is a new platform that connects people and artists through live music chat. Join conversations and connect with a global music community 🎵💬
             </Description>
         </div>
     );
