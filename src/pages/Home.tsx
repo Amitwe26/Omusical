@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import Header from '../components/Header';
 import CoverImage from '../components/CoverImage';
+import { GenreList } from '../components/GenreList';
 
 const Home = () => {
     return (
@@ -11,6 +12,7 @@ const Home = () => {
             <Description>
                 Omusical is a new platform that connects people and artists through live music chat. Join conversations and connect with a global music community 🎵💬
             </Description>
+            <GenreList />
         </div>
     );
 };

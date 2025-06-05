@@ -1,8 +1,9 @@
 import {useForm} from 'react-hook-form';
-import {login, signup} from '../services/authService';
+import {login, signup, signInWithGoogle} from '../services/authService';
 import {useState} from 'react';
 import styled from 'styled-components';
 import {useNavigate} from "react-router-dom";
+import { ReactComponent as GoogleIcon } from '../assets/svg/google-icon.svg';
 // import {createUserWithEmailAndPassword, signInWithEmailAndPassword} from "firebase/auth";
 
 type AuthFormProps = {
@@ -29,7 +30,17 @@ const AuthForm = ({type}: AuthFormProps) => {
             } else {
                 await signup(data.email, data.password);
                 console.log('Signed up successfully!');
+                navigate('/rooms');
             }
+        } catch (err: any) {
+            setError(err.message);
+        }
+    };
+
+    const handleGoogleSignIn = async () => {
+        try {
+            await signInWithGoogle();
+            navigate('/rooms');
         } catch (err: any) {
             setError(err.message);
         }
@@ -55,8 +66,18 @@ const AuthForm = ({type}: AuthFormProps) => {
             <Input {...register('password')} placeholder="Password" type="password" required/>
             {error && <ErrorText>{error}</ErrorText>}
             <SubmitButton type="submit">{type === 'login' ? 'Login' : 'Signup'}</SubmitButton>
+            
+            <OrDivider>
+                <span>OR</span>
+            </OrDivider>
 
-            {/* כפתור חזרה לעמוד הבית */}
+            <GoogleButton type="button" onClick={handleGoogleSignIn}>
+                <GoogleIconWrapper>
+                    <GoogleIcon />
+                </GoogleIconWrapper>
+                Continue with Google
+            </GoogleButton>
+
             <BackButton type="button" onClick={() => navigate('/')}>
                 Back to Home
             </BackButton>
@@ -112,4 +133,52 @@ const BackButton = styled.button`
     //text-decoration: underline;
     cursor: pointer;
     border: none;
+`;
+
+const OrDivider = styled.div`
+    display: flex;
+    align-items: center;
+    text-align: center;
+    margin: 20px 0;
+    
+    &::before,
+    &::after {
+        content: '';
+        flex: 1;
+        border-bottom: 1px solid #ddd;
+    }
+    
+    span {
+        padding: 0 10px;
+        color: #666;
+        font-size: 14px;
+    }
+`;
+
+const GoogleButton = styled.button`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: white;
+    color: #757575;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+
+    &:hover {
+        background-color: #f5f5f5;
+    }
+`;
+
+const GoogleIconWrapper = styled.div`
+    margin-right: 10px;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 `;
