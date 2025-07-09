@@ -26,11 +26,11 @@ const AuthForm = ({type}: AuthFormProps) => {
             if (type === 'login') {
                 await login(data.email, data.password);
                 console.log('Logged in successfully!');
-                navigate('/rooms'); // אחרי הצלחה מעביר לעמוד הלייב
+                navigate('/'); // אחרי הצלחה מעביר לעמוד הלייב
             } else {
                 await signup(data.email, data.password);
                 console.log('Signed up successfully!');
-                navigate('/rooms');
+                navigate('/');
             }
         } catch (err: any) {
             setError(err.message);

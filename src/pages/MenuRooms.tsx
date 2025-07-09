@@ -1,30 +1,22 @@
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import axios from "axios";
-
-const rooms = ['Pop', 'Rap', 'Classic', 'House'];
+import { genres, Genre } from '../utils/genreData';
 
 const MenuRooms = () => {
     const navigate = useNavigate();
 
-    // const createRoom=async(name: string) => {
-    //     const response = await axios.post('http://localhost:5001/create-room', { name });
-    //     console.log(response.data);
-    //     return response.data;
-    // }
-    const handleJoinRoom =async (roomName: string) => {
-        // const res = await createRoom(roomName);
-        // console.log(res)
-        navigate(`/room/${roomName}`);
+    const handleJoinRoom = (genre: Genre) => {
+        navigate(`/room/${genre.slug}`);
     };
 
     return (
         <Wrapper>
             <Title>Select a Music Room</Title>
             <RoomsList>
-                {rooms.map((room) => (
-                    <RoomButton key={room} onClick={() => handleJoinRoom(room)}>
-                        {room}
+                {genres.map((genre) => (
+                    <RoomButton key={genre.id} onClick={() => handleJoinRoom(genre)}>
+                        {genre.name}
                     </RoomButton>
                 ))}
             </RoomsList>
@@ -47,24 +39,32 @@ const Title = styled.h1`
   font-size: 32px;
   margin-bottom: 40px;
 `;
-
 const RoomsList = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 24px;
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
 `;
 
 const RoomButton = styled.button`
-  padding: 12px 24px;
-  font-size: 18px;
+  padding: 32px 0;
+  font-size: 20px;
   border: none;
-  border-radius: 8px;
+  border-radius: 16px;
   background-color: #4e4feb;
   color: white;
   cursor: pointer;
-  transition: background-color 0.2s ease;
+  box-shadow: 0 2px 8px rgba(78, 79, 235, 0.08);
+  transition: background-color 0.2s, transform 0.2s, box-shadow 0.2s;
+  font-weight: 600;
+  letter-spacing: 1px;
 
   &:hover {
     background-color: #3c3ccc;
+    transform: translateY(-2px) scale(1.03);
+    box-shadow: 0 4px 16px rgba(78, 79, 235, 0.15);
   }
 `;
+

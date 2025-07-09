@@ -2,13 +2,16 @@ import React from 'react';
 import styled from 'styled-components';
 import { genres } from '../../utils/genreData';
 import { GenreCard } from './GenreCard';
-
-
+import { useNavigate } from 'react-router-dom';
 
 export const GenreList = () => {
+  const navigate = useNavigate();
   return (
     <>
-      <Title>Room Types</Title>
+      <TitleRow>
+        <Title>Room Types</Title>
+        <GoRoomsButton onClick={() => navigate('/rooms')}>Go to all rooms</GoRoomsButton>
+      </TitleRow>
       <ScrollContainer>
         <Container>
           {genres.map((genre) => (
@@ -19,6 +22,27 @@ export const GenreList = () => {
     </>
   );
 }; 
+
+const TitleRow = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  margin: 1rem 1rem 0.5rem;
+`;
+
+const GoRoomsButton = styled.button`
+  padding: 0.4rem 1rem;
+  font-size: 1rem;
+  background: #4a90e2;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-left: auto;
+  &:hover {
+    background: #357ab8;
+  }
+`;
 
 const ScrollContainer = styled.div`
   width: 100%;

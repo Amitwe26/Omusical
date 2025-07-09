@@ -2,6 +2,7 @@ import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import { useState } from 'react';
 import VideoPlayer from '../components/VideoPlayer';
+import Header from '../components/Header';
 // import VideoPlayer from '../components/VideoPlayer';
 
 const RoomPage = () => {
@@ -11,7 +12,8 @@ const RoomPage = () => {
 
     return (
         <Wrapper>
-            <Header>Room: {roomName}</Header>
+            <Header />
+            <RoomTitle>Room: {roomName}</RoomTitle>
             <VideoPlayer />
             <Controls>
                 <Button>Mute</Button>
@@ -35,7 +37,7 @@ const Wrapper = styled.div`
   padding: 20px;
 `;
 
-const Header = styled.h2`
+const RoomTitle = styled.h2`
   margin-bottom: 20px;
 `;
 
