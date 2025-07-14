@@ -1,20 +1,18 @@
-import { useParams } from 'react-router-dom';
+import {useParams} from 'react-router-dom';
 import styled from 'styled-components';
-import { useState } from 'react';
+import {useState} from 'react';
 import VideoPlayer from '../components/VideoPlayer';
-import Header from '../components/Header';
 // import VideoPlayer from '../components/VideoPlayer';
 
 const RoomPage = () => {
-    const { roomName } = useParams<{ roomName: string }>();
+    const {roomName} = useParams<{ roomName: string }>();
     const [isChatOpen, setIsChatOpen] = useState(false);
     const identity = 'user-' + Math.floor(Math.random() * 1000); // זמני
 
     return (
         <Wrapper>
-            <Header />
             <RoomTitle>Room: {roomName}</RoomTitle>
-            <VideoPlayer />
+            <VideoPlayer/>
             <Controls>
                 <Button>Mute</Button>
                 <Button>Camera Off</Button>
@@ -31,41 +29,41 @@ export default RoomPage;
 
 // Styled Components
 const Wrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
 `;
 
 const RoomTitle = styled.h2`
-  margin-bottom: 20px;
+    margin-bottom: 20px;
 `;
 
 const Controls = styled.div`
-  margin-top: 20px;
-  display: flex;
-  gap: 12px;
+    margin-top: 20px;
+    display: flex;
+    gap: 12px;
 `;
 
 const Button = styled.button`
-  padding: 10px 16px;
-  border: none;
-  border-radius: 6px;
-  background-color: #4e4feb;
-  color: white;
-  cursor: pointer;
+    padding: 10px 16px;
+    border: none;
+    border-radius: 6px;
+    background-color: #4e4feb;
+    color: white;
+    cursor: pointer;
 
-  &:hover {
-    background-color: #3c3ccc;
-  }
+    &:hover {
+        background-color: #3c3ccc;
+    }
 `;
 
 const ChatBox = styled.div`
-  margin-top: 20px;
-  width: 100%;
-  max-width: 400px;
-  height: 300px;
-  background-color: #f1f1f1;
-  border-radius: 8px;
-  padding: 12px;
+    margin-top: 20px;
+    width: 100%;
+    max-width: 400px;
+    height: 300px;
+    background-color: #f1f1f1;
+    border-radius: 8px;
+    padding: 12px;
 `;
